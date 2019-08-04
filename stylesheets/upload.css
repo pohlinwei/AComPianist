@@ -1,0 +1,60 @@
+/* Stylesheet for all image-upload related elements */
+
+#upload-page > p {
+    font-size: 1.3em;
+}
+
+.huge-break {
+    line-height:275%;
+}
+
+#input-break {
+    line-height: 150%;
+}
+
+form > .buttons, input[type='file']::-webkit-file-upload-button {
+    border: 1px solid #000000;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 1.5em;
+    padding: 1%;
+}
+
+@media screen and (max-width: 600px) {
+    input[type='file'] {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    input[type='file'] {
+        width: 45%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    input[type='file'] {
+        width: 30%;
+    }
+}
+
+input[type='file']::-webkit-file-upload-button {
+    padding: 2%;
+    font-size: 1em;
+}
+
+input[type='file']::-webkit-file-upload-button:focus {
+    outline: none;
+}
+
+input[type='file']::-webkit-file-upload-button:hover {
+    cursor: pointer;
+}
+
+.buttons:focus {
+    outline: none;
+}
+
+.buttons:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,11 @@
+#not-supported-page > p {
+    font-size: 2em;
+}
+
+#label {
+    text-decoration: underline;
+}
+
+#label:hover {
+    cursor: pointer;
+}

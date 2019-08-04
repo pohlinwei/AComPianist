@@ -1,0 +1,27 @@
+{
+  "name": "acompianist",
+  "version": "1.0.0",
+  "description": "AComPianist is a computer pianist that is capable of playing an accompanying piece for an image.",
+  "main": "server.js",
+  "scripts": {
+    "tsc": "tsc",
+    "bundle": "browserify --standalone accompianist main.ts -p [tsify] > bundle.js",
+    "build-and-view": "npm run bundle && npm run tsc && node server.js",
+    "view": "npm run tsc && node server.js"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1",
+    "@types/express": "^4.17.0",
+    "express": "^4.17.1",
+    "parser": "^0.1.4",
+    "tsify": "^4.0.1",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs-core": "0.8.0",
+    "@types/jasmine": "^3.3.16",
+    "tone-piano": "0.0.12"
+  }
+}

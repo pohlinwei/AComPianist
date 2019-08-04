@@ -1,0 +1,40 @@
+html { 
+    background: #FFFDE8 no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html {
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+}
+
+/* For centralising main div vertically */
+@media screen and (orientation: landscape) {
+    .container {
+        top: 25vh;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .container {
+        top: 30vh;
+    }
+}
+
+@media screen and (max-height: 480px) {
+    .container {
+        top: 10vh;
+    }
+}
+
+
+.hidden {
+    display: none;
+}
