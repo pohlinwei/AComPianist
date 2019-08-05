@@ -21,21 +21,18 @@ app.post('/get_params', (req, res) => {
     }
 
     // obtain parameters for music generation
-    console.log('Server received image.');
     // retrieve data url of image
     const image: string = req.body.image;
     const spawn = child_process.spawn;
     const get_params = spawn('python3', ['main.py', image]);
     // update PID for new get_params process
     current_pid = get_params.pid;
-    console.log('new pid: ' + current_pid);
+    console.log('Server received image and new process is starting. New pid: ' + current_pid);
     let parameters = '';
     let count = 0;
     get_params.stdout.on('data', (data) => {
         parameters = parameters + data.toString();
-        console.log(parameters);
-        console.log('hi');
-        console.log(count);
+        console.log('Parameters for this image: ' + parameters);
         count++;
     })
     get_params.stderr.on('err', (err) => {
