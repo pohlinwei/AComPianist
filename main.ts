@@ -1,4 +1,3 @@
-// !!! todo: add in details of modifications made and any other credits
 /* Copyright 2017 Google Inc. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +15,15 @@ limitations under the License.
 
 import * as tf from '@tensorflow/tfjs-core'
 import { Minor } from './tonalities/minor';
+import { Major } from './tonalities/major';
+import { Tonality } from './tonalities/tonality';
 
 ///////////////////////////////////////////
 /////     ALL HTML ELEMENTS      /////////
 //////////////////////////////////////////
+/* HTML elements for intro page */
+const introPage = <HTMLDivElement> document.getElementById('intro-page');
+const naviButton = <HTMLDivElement> document.getElementById('navi-button');
 
 /* HTML elements for uploading of image */
 const uploadPage = <HTMLDivElement> document.getElementById('upload-page')
@@ -41,6 +45,7 @@ const gainDisplayVal = <HTMLParagraphElement> document.getElementById('gain-val'
 const notes = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b'];
 const histogramDisplayElements: HTMLDivElement[] = notes.map(
     note => document.getElementById(note) as HTMLDivElement);
+const guide = document.getElementById('guide');
 
 
 ///////////////////////////////////////////
@@ -144,10 +149,10 @@ let modelReady = false;
 let controlDensity: number;
 const DEFAULT_DENSITY = 2;
 const DENSITY_BIN_RANGES = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0];
-const NUM_DENSITY = 5;
+const NUM_DENSITY = 4; // maximum density is 16
 // Tonality
 let pitches: number[]; 
-let controlTonality: Minor;
+let controlTonality: Tonality;
 // Gain
 let controlGain = DEAFULT_GAIN;
 
@@ -156,24 +161,40 @@ let controlGain = DEAFULT_GAIN;
 //////////////////////////////////////////
 const isDeviceSupported = tf.ENV.get('WEBGL_VERSION') >= 1;
 
-
 ///////////////////////////////////////////
 /////   ADD HTML EVENT HANDLERS   ////////
 //////////////////////////////////////////
+/* initialising display */
+// only show intro page initially
+notSupportedPage.classList.add('hidden');
+uploadPage.classList.add('hidden');
+mainPage.classList.add('hidden');
+loadingPage.classList.add('hidden');
+mainPage.style.display = 'none';
+
+/* For intro page */
+naviButton.onclick = () => {
+    if (!modelReady) {
+        introPage.classList.add('hidden');
+        if (isDeviceSupported) {
+            // show upload page
+            // hide not supported page
+            uploadPage.classList.remove('hidden');
+        } else {
+            // show notsupported page
+            notSupportedPage.classList.remove('hidden');
+        }
+        // change it to 'resume' button
+        naviButton.innerHTML = 'Resume <i class="fas fa-angle-double-right"></i>';
+    } else {
+        // display main page
+        mainPage.style.display = 'flex';
+        // hide intro page
+        introPage.classList.add('hidden');
+    }
+}
 
 /* For upload page */
-if (isDeviceSupported) {
-    // show upload page
-    // hide not supported page
-    notSupportedPage.classList.add('hidden');
-} else {
-    // show notsupported page
-    uploadPage.classList.add('hidden');
-}
-// hide main page initially
-mainPage.classList.add('hidden');
-// !!! To be removed
-loadingPage.classList.add('hidden');
 // do not allow submission when no image is uploaded
 submitImage.disabled = true;
 file.onchange = () => {
@@ -191,13 +212,17 @@ form.onsubmit = (event) => {
     // send image for processing and load performance_rnn model
     Promise.all([loadImage(), loadModels()])
         .then(response => {
-            console.log('blah: ' + response);
             // hide loading page
             loadingPage.classList.add('hidden');
             // show main page 
-            mainPage.setAttribute('id', 'main-show');
+            mainPage.style.display = 'flex';
+            // get parameters
+            let parameters = <string> response[0];
+            parameters = parameters.slice(1, parameters.length - 2);
+            const positive = parameters.split(',')[0];
+            const avg_hue = <number> parseFloat(parameters.split(',')[1]);
             // set param
-            set_param('minor'); 
+            set_param(positive, avg_hue); 
             // generate music
             generateStep(currentLoopId);
         })
@@ -206,6 +231,14 @@ form.onsubmit = (event) => {
             console.log('loadImage or loadModels process failed.');
             console.log(err);
         });
+}
+
+/* For main page */
+guide.onclick = () => {
+    // hide main page 
+    mainPage.style.display = 'none';
+    // show intro page
+    introPage.classList.remove('hidden');
 }
 
 /* For user control */
@@ -262,25 +295,16 @@ function loadImage() {
         const reader = new FileReader();
     
         reader.addEventListener("load", () => {
-            // !!! debugging
-            console.log("read");
-            console.log(reader.result);
-            console.log('enter');
             const imageDataUrl= <string> reader.result;
             // resize image, send it to python script for processing and 
             // determine parameters for performance-rnn
             resizeImage(imageDataUrl)
                 .then((resizedImage) => {
-                    // !!! debugging
-                    console.log('outside: ');
-                    console.log(resizedImage);
                     const xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = () => {
                         if (xhttp.readyState == 4 && xhttp.status == 200) {
-                            console.log('parameters: ');
-                            console.log(xhttp.responseText);
-                            // !!! debugging (change to xhttp.responsetext)
-                            resolve('done');
+                            const response: string = xhttp.response;
+                            resolve(response);
                         } else if (xhttp.status >= 400) {
                             reject('Unable to process image.');
                         }
@@ -399,19 +423,18 @@ function resetRnn() {
 /**
  * Sets initial parameters for music generation.
  */
-
-// !!! to-do: add in hue
-function set_param(tonality:string) {
-    if (tonality == 'minor') {
-      console.log('Chosen tonality: ' + tonality);
+function set_param(positive: string, avg_hue: number) {
+    if (positive == 'True') {
+        controlTonality = new Major(avg_hue);
+    } else {
+        controlTonality = new Minor(avg_hue);
     }
-    controlTonality = new Minor(200);
     pitches = controlTonality.changeKey(controlTonality.getDominantHue());
     // set note density to default
     controlDensity = DEFAULT_DENSITY;
     // update display
     gainDisplayVal.innerHTML = controlGain.toString() + ' %';
-    densityDisplayVal.innerHTML = controlDensity.toString() + ' %';
+    densityDisplayVal.innerHTML = controlDensity.toString();
     updateConditioningParams();
 }
 
@@ -444,8 +467,11 @@ function updateConditioningParams() {
     }
   
     const noteDensity = DENSITY_BIN_RANGES[controlDensity];
+    // update display for note density
     densityDisplayVal.innerHTML = noteDensity.toString();
-  
+    // update display for gain
+    gainDisplayVal.innerHTML = controlGain.toString() + ' %';
+
     noteDensityEncoding =
         tf.oneHot(
             tf.tensor1d([controlDensity + 1], 'int32'),
@@ -459,7 +485,9 @@ function updateConditioningParams() {
     const pitchHistogramTotal = pitchHistogram.reduce((prev, val) => {
       return prev + val;
     });
+    console.log(pitchHistogramTotal);
     for (let i = 0; i < PITCH_HISTOGRAM_SIZE; i++) {
+        console.log('pitch i: ' + pitchHistogram[i]);
         buffer.set(pitchHistogram[i] / pitchHistogramTotal, i); 
     }
     pitchHistogramEncoding = buffer.toTensor();
@@ -487,7 +515,7 @@ function controlGainFunc(eventTime: number, cursorX: number, cursorY: number) {
     // update y-coordinate
     y0 = y1;
     // time lapse between cursor events
-    let dt = eventTime - cursorTime;
+    let dt = isNaN(eventTime - cursorTime) ? 1 : (eventTime - cursorTime);
     // difference in distance
     let ds = dx * dx + dy * dy;
     console.log("ds: " + ds);
@@ -505,8 +533,6 @@ function controlGainFunc(eventTime: number, cursorX: number, cursorY: number) {
     } else {
         controlGain = Math.floor(scaledRate);
     }
-    // !!! debugging
-    gainDisplayVal.innerHTML = controlGain.toString() + ' %';
     // update cursorTime 
     cursorTime = eventTime;
 }
@@ -519,7 +545,7 @@ function controlTonalityFunc(hue: number) {
 /* lightness of pixel cursor is currently pointin to affects note density */
 function controlDensityFunc(lightness: number) {
     controlDensity = NUM_DENSITY - 
-        Math.floor(lightness / (100 / DENSITY_BIN_RANGES.length));
+        Math.floor(lightness / (100 / NUM_DENSITY));
 } 
 
 function calculateHsv(cursorRelativeX: number, cursorRelativeY: number) {
