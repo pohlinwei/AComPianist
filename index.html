@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>AComPianist</title>
     <link rel="stylesheet" href="stylesheets/common.css"/>
+    <link rel="stylesheet" href="stylesheets/intro.css"/>
     <link rel="stylesheet" href="stylesheets/upload.css">
     <link rel="stylesheet" href="stylesheets/loading.css">
     <link rel="stylesheet" href="stylesheets/unsupported.css">
@@ -12,6 +13,24 @@
     <link rel="stylesheet" href="stylesheets/key.css">
 </head>
 <body>
+    <!--Intro page-->
+    <div id="intro-page" class="container">
+        <div><p>AComPianist</p></div>
+        <div>
+            <p>AComPianist is a computer pianist that plays an accompanying piece when an image is uploaded.</p>
+            <p><span id="instructions">Upload an image and hover over it to influence the generated music.</span></p>
+        </div>
+        <div>
+            <div id="navi-button">Start <i class="fas fa-angle-double-right"></i></div>
+        </div>
+        <div id="credits">
+            <p>Created with Magenta's <span class="redirect">
+               <a href="https://github.com/tensorflow/magenta-demos/tree/master/performance_rnn">Performance RNN</a></span> 
+               and a simple emotion classification neural network. All code and credits can be found 
+               <span class="redirect"><a href="https://github.com/pohlinwei/AComPianist">here</a></span>.
+            </p> 
+        </div>
+    </div>
     <!--Page for user to upload image-->
     <div id="upload-page" class="container">
         <p>Upload a .jpeg with a minimum dimension of 256px by 256px.</p>
@@ -26,7 +45,8 @@
         </form>
     </div>
     <div id="not-supported-page" class="container">
-        <p><span id="label"><strong>AComPianist</strong></span> is unfortunately not supported on your device.</p>
+        <p><span id="label"><a href="https://github.com/pohlinwei/AComPianist"><strong>AComPianist</strong></a></span> 
+            is unfortunately not supported on your device.</p>
         <p>Please try using it on a desktop with Chrome/Firefox.</p>
     </div>
     <div id="loading-page" class="container">
@@ -36,7 +56,10 @@
         </div>
     </div>
     <div id="main" class="container">
-        <div id="title"><p>AComPianist</p></div>
+        <div id="title">
+            <div id="header"><p><a href="https://github.com/pohlinwei/AComPianist">AComPianist</a></p></div>
+            <div id="guide"><i class="fas fa-question-circle "></i></div>
+        </div>
         <div id="canvas"><canvas width="256" height="256"></canvas></div>
         <br class="huge-break"/>
         <div id="controls">
