@@ -2,10 +2,7 @@
     font-size: 2em;
 }
 
-#label {
+#label > a {
     text-decoration: underline;
-}
-
-#label:hover {
-    cursor: pointer;
+    color: #000;
 }
