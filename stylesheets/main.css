@@ -1,14 +1,40 @@
-#main-show {
+#main {
     display: flex;
     flex-direction: column;    
     justify-content: center;
     align-items: center;
-    top: 5vh;
+    top: 0vh;
 }
 
 #title {
     font-size: 2.5em;
+    margin-bottom: 7vh;
+    display: flex;
+    flex-direction: row;
+    height: 100px;
 } 
+
+#header {
+    border-bottom: 1px solid #000;
+    margin-right: 12px;
+}
+
+#header > p > a {
+    text-decoration: none;
+    color: #000;
+}
+
+#guide > i {
+    vertical-align: text-bottom;
+    height: 0px;
+    color: rgb(89, 89, 89);
+    font-size: 0.8em;
+}
+
+#guide > i:hover {
+    cursor: pointer;
+    color: rgba(89, 89, 89, 0.5);
+}
 
 #title > p {
     line-height: 0vh;
