@@ -1,3 +1,5 @@
+import { Tonality } from './tonality';
+
 /**
  * The following corresponds to the frequency of
  * ['c', 'cs', 'd', 'ds', 'e', 'f', 'fs', 'g', 'gs', 'a', 'as', 'b'] 
@@ -31,24 +33,18 @@
 const NUM_KEYS = 12;
 const SECTOR_DEGREE = 360 / NUM_KEYS;
 
-export class Minor {
-    private dominantHue: number;
-
+export class Minor extends Tonality {
     constructor(dominantHue: number) {
-        this.dominantHue = dominantHue;
+       super(dominantHue);
     }
 
     changeKey(hue: number) {
         // determine absolute change in hue
-        let hueChange = hue - this.dominantHue;
+        let hueChange = hue - super.getDominantHue();
         if (hueChange < 0) {
             hueChange += 360;
         }
         let hueChangeIndex = Math.floor(hueChange / SECTOR_DEGREE);
         return allKeyIndices[hueChangeIndex];
-    }
-
-    getDominantHue() {
-        return this.dominantHue;
     }
 }
