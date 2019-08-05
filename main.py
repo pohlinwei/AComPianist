@@ -21,7 +21,6 @@ def data_url_to_image(data_url):
     with open(TEMP_FILE_PATH, 'wb') as f:
         f.write(data.file.read()) 
 
-
 if __name__ == "__main__": 
     img_data_url = sys.argv[1]
     try:
