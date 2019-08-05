@@ -1,0 +1,45 @@
+#intro-page {
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.3em;
+    top: 15vh;
+}
+
+#intro-page > div {
+    text-align: left;
+}
+
+#intro-page > div:first-child {
+    font-size: 3em;
+    border-bottom: 1px solid #000;
+    line-height: 10px;
+}
+
+#instructions {
+    background-color: rgba(255, 255, 0, 0.5);
+}
+
+#navi-button {
+    border: 1px solid #000;
+    display: inline-block;
+    padding: 10px;
+}
+
+#navi-button > i {
+    height: 0px;
+}
+
+#navi-button:hover {
+    cursor: pointer;
+}
+
+.redirect > a {
+    text-decoration: underline;
+    color: #000;
+}
+
+#credits {
+    margin-top: 55px;
+    font-size: 0.8em;
+}
