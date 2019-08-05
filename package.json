@@ -9,11 +9,12 @@
     "build-and-view": "npm run bundle && npm run tsc && node server.js",
     "view": "npm run tsc && node server.js"
   },
-  "author": "",
+  "author": "poh lin wei",
   "license": "Apache-2.0",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.10.1",
     "@types/express": "^4.17.0",
+    "browserify": "^16.3.0",
     "express": "^4.17.1",
     "parser": "^0.1.4",
     "tsify": "^4.0.1",
