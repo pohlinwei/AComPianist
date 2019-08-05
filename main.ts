@@ -227,9 +227,7 @@ form.onsubmit = (event) => {
             generateStep(currentLoopId);
         })
         .catch(err => {
-            // !!! to-do: specify which process is causing an error
-            console.log('loadImage or loadModels process failed.');
-            console.log(err);
+            console.log('loadImage or loadModels process failed. Error: ' + err);
         });
 }
 
@@ -256,20 +254,15 @@ canvas.onmousemove = (event) => {
     let cursorRelativeX = cursorX - canvasTopLeftX;
     let cursorRelativeY = cursorY - canvasTopLeftY;
     // determine changes in control gain
-    console.log('change gain');
     controlGainFunc(eventTime, cursorX, cursorY);
     // calculate hsv
-    console.log('calculate hsv');
     let hsl = calculateHsv(cursorRelativeX, cursorRelativeY);
     let h = hsl[0];
     let l = hsl[2];
     // determine changes in tonality
-    console.log('tonality change');
     controlTonalityFunc(h);
     // determine changes in note density
-    console.log('density change');
     controlDensityFunc(l); 
-    console.log('update');
     updateConditioningParams();
 }
 
@@ -485,9 +478,7 @@ function updateConditioningParams() {
     const pitchHistogramTotal = pitchHistogram.reduce((prev, val) => {
       return prev + val;
     });
-    console.log(pitchHistogramTotal);
     for (let i = 0; i < PITCH_HISTOGRAM_SIZE; i++) {
-        console.log('pitch i: ' + pitchHistogram[i]);
         buffer.set(pitchHistogram[i] / pitchHistogramTotal, i); 
     }
     pitchHistogramEncoding = buffer.toTensor();
@@ -518,9 +509,6 @@ function controlGainFunc(eventTime: number, cursorX: number, cursorY: number) {
     let dt = isNaN(eventTime - cursorTime) ? 1 : (eventTime - cursorTime);
     // difference in distance
     let ds = dx * dx + dy * dy;
-    console.log("ds: " + ds);
-    console.log("dt: " + dt);
-    console.log(ds / dt);
     // rate of change
     let rate = ds / dt;
     // scale rate before using it to determine gain
@@ -549,15 +537,12 @@ function controlDensityFunc(lightness: number) {
 } 
 
 function calculateHsv(cursorRelativeX: number, cursorRelativeY: number) {
-    console.log(cursorRelativeX);
-    console.log(cursorRelativeY);
     const ctx = canvas.getContext('2d');
     const pixel = ctx.getImageData(cursorRelativeX, cursorRelativeY, 1, 1);
     const data = pixel.data;
     const r = data[0];
     const g = data[1];
     const b = data[2];
-    console.log('rgba value: ' + r + ' ' + g + ' ' + b);
     return rgbToHsv(r, g, b);
 } 
   
@@ -605,7 +590,6 @@ function rgbToHsv(r: number, g: number, b: number) {
     // convert s and l values to percentages
     s = +(s * 100).toFixed(1);
     l = +(l * 100).toFixed(1);
-    console.log('hsl value: ' + h + ' ' + s + ' ' + l);
     return [h, s, l];
 }
 
