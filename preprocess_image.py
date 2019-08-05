@@ -72,24 +72,17 @@ def calculate_pad(hsv):
     return pad
 
 
-""" Returns all necessary features """
+""" Returns all necessary features and average hue """
 def preprocess(img_path):
     absolute_path = os.getcwd() + "/" + img_path
     # obtain neceassy features as a row matrix
-    print("start lbp: ")
     lbp = np.array(calculate_lbp(absolute_path))
-    print("start obj: ")
     obj = predict_object(absolute_path).flatten()
-    print("start hsv, rgb: ")
     rgb, hsv = mean(absolute_path)
-    print("start rgb: ")
     rgb = rgb.flatten()
     # calculate pleasure, arousal and dominance values
-    print("start pad: ")
     pad = calculate_pad(hsv).flatten()
-    print("start flatten hsv: ")
     hsv = hsv.flatten()
     # concatenate all matrices
     features = np.concatenate((lbp, rgb, pad, hsv, obj), axis=None)
-    print("Done preprocessing one")
-    return features
+    return features, hsv[0]
