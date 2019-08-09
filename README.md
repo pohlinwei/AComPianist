@@ -20,16 +20,16 @@ Go to the directory where the files are installed.
 Run the following commands to download the required modules and packages.
 
 ```bash
-npm install && virtualenv venv && pip install -r requirements.txt
+npm install 
+npm run first-build
 ```
-
-Then, to set up the required environment
+In the future, to view the web app activate the virtual environment if it hasn't been done using
 
 ```bash
 . venv/bin/activate
 ```
 
-Finally, to view the web app
+Then, 
 
 ```bash
 npm run view
