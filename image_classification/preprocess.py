@@ -1,3 +1,13 @@
+"""
+The preprocessing step uses VGG16 from the research paper 
+'Very Deep Convolutional Networks for Large-Scale Image Recognition' by 
+Karen Simonyan, Andrew Zisserman. Find the paper here: https://arxiv.org/abs/1409.1556
+
+The calculation of pleasure, arousal and dominance values uses the formula from the
+research paper 'Effects of Color on Emotions' by Patricia Valdez, Albert Mehrabian.
+Find the paper here: https://pdfs.semanticscholar.org/4711/624c0f72d8c85ea6813b8ec5e8abeedfb616.pdf
+"""
+
 # for general purpose
 import os
 import sys
@@ -62,7 +72,6 @@ def predict_object(img_path):
     return probabilities
 
 """ Calculates pleasure, arousal and dominance values. 
-    Formula is obtained from 'Effects of Color on Emotions' by Valdez, Mehrabian
     Note 'value' in hsv is used as a measure of brightness in this case
 """
 def calculate_pad(hsv):
