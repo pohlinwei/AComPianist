@@ -2,7 +2,7 @@
     "Building a Large Scale Dataset for Image Emotion Recognition: The Fine Print and The Benchmark", 
     the Thirtieth AAAI Conference on Artificial Intelligence (AAAI), 2016, 
     by Quanzeng You, Jiebo Luo, Hailin Jin and Jianchao Yang.
-    The dataset is found in 'agg'.
+    The dataset is found in './agg'.
     Note: This script only downloads the required image temporarily for preprocessing.
     It saves the preprocess data instead. 
 """
