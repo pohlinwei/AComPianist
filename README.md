@@ -68,11 +68,7 @@ Finally, to train the neural network, run the following command
 python3 train.py
 ```
 
-To find the newly-trained model, 
-```bash
-cd ../
-```
-It is saved in the file named `predict_emo.h5`.
+The newly-trained model is saved at the location `../predict_emo.h5`.
 
 Note: If the downloading of data is done on Mac with multi-core, you might need to do the following to allow files to be downloaded in parallel.
 
