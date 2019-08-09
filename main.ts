@@ -1,4 +1,5 @@
 /* Copyright 2017 Google Inc. All Rights Reserved.
+   Modifications copyright (C) 2019 Poh Lin Wei.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -746,3 +747,12 @@ function resetRnnRepeatedly() {
     setTimeout(resetRnnRepeatedly, RESET_RNN_FREQUENCY_MS);
 }
 setTimeout(resetRnnRepeatedly, RESET_RNN_FREQUENCY_MS);
+
+/* Modifications made to the code include: 
+1. Overhauling of how user can influence the generated music based on the user's interaction
+with the image. 
+2. Removal of the option to choose whether to turn on or off conditions. The default and only
+option is to turn it on. 
+3. Addition of an introduction page and upload page for user to upload an image.
+4. Removal of MIDI control options. 
+5. Removal of reset option. The model will reset on its own after the default specified time. */
