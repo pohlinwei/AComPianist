@@ -1,3 +1,11 @@
+""" Neural network architecture is adapted from that found in the research paper 
+'Building Emotional Machines: Recognizing Image Emotions through Deep Neural Networks' by
+Hye-Rin Kim, Yeong-Seok Kim, Seon Joo Kim, In-Kwon Lee (https://arxiv.org/pdf/1705.07543.pdf)
+and source code provided by Intel AI Developer Program for its 
+'Hands-On AI Part 18: Emotion Recognition from Images Model Tuning and Hyperparameters'
+(https://software.intel.com/en-us/articles/hands-on-ai-part-18-emotion-recognition-from-images-model-tuning-and-hyperparameters)
+"""
+
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Flatten, Dense
