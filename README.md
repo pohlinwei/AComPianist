@@ -26,3 +26,10 @@ Lastly, the rate at which the cursor moves influences the loudness of the genera
 
 References
 ----------
+1. Afshine Amidi and Shervine Amidi (2018) Keras Data Generator [Source Code]. https://github.com/afshinea/keras-data-generator/
+2. Quanzeng You, Jiebo Luo, Hailin Jin and Jianchao Yang. (2016) Building a Large Scale Dataset for Image Emotion Recognition: The Fine Print and The Benchmark [Research Paper]. https://arxiv.org/pdf/1605.02677.pdf
+3. Karen Simonyan, Andrew Zisserman (2015) Very Deep Convolutional Networks for Large-Scale Image Recognition [Research Paper]. https://arxiv.org/abs/1409.1556
+4. Patricia Valdez and Albert Mehrabian (1994) Effects of Color on Emotions [Research Paper]. https://pdfs.semanticscholar.org/4711/624c0f72d8c85ea6813b8ec5e8abeedfb616.pdf
+5. Intel AI Developer Program (2017) Hands-On AI Part 18: Emotion Recognition from Images Model Tuning and Hyperparameters [Source Code]. https://software.intel.com/en-us/articles/hands-on-ai-part-18-emotion-recognition-from-images-model-tuning-and-hyperparameters
+6. Hye-Rin Kim, Yeong-Seok Kim, Seon Joo Kim, In-Kwon Lee (2017) Building Emotional Machines: Recognizing Image Emotions through Deep Neural Networks [Research Paper] https://arxiv.org/pdf/1705.07543.pdf
+7. Ian Simon and Sageev Oore (2017) Performance RNN: Generating Music with Expressive Timing and Dynamics [Research Paper] https://magenta.tensorflow.org/performance-rnn
