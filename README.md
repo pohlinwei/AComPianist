@@ -7,6 +7,78 @@ How Does It Work?
 
 Instructions
 ------------
+### Using Pretrained Weights for Web App
+Download the above files. Then, install [Node.js and npm](https://nodejs.org/en/download/) and [pip](https://pip.pypa.io/en/stable/installing/) if they have yet to be installed. 
+
+Go to the directory where the files are installed.
+
+Run the following commands to download the required modules and packages.
+
+```bash
+npm install && pip install -r requirements.txt
+```
+
+Then, to set up the required environment
+
+```bash
+. venv/bin/activate
+```
+
+Finally, to view the web app
+
+```bash
+npm run view
+```
+
+For those who are interested to modify any files, run the following command to view the changes made.
+
+```bash
+npm run build-and-view
+```
+### Re-training Neural Network for Emotion Classification of Images (Optional) 
+
+If the virtual environment has not already been activated,
+
+```bash 
+. venv/bin/activate
+```
+
+Then, 
+
+```bash
+cd image_classification
+```
+
+Download the required [dataset](http://www.cs.rochester.edu/u/qyou/deepemotion/) and place it in `image_classification`.
+
+To download and preprocess the data,
+
+```bash
+python3 download_data.py
+```
+
+Finally, to train the neural network, run the following command
+
+```bash
+python3 train.py
+```
+
+To find the newly-trained model, 
+```bash
+cd ../
+```
+It is saved in the file named `predict_emo.h5`.
+
+Note: If the downloading of data is done on Mac with multi-core, you might need to do the following to allow files to be downloaded in parallel.
+
+Go to your bash profile and add the following line to the end
+
+```bash
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+```
+
+Close the terminal and re-open the terminal.
+
 
 The Details
 -----------
