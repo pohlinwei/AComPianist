@@ -29,7 +29,7 @@ In the future, to view the web app activate the virtual environment if it hasn't
 . venv/bin/activate
 ```
 
-Then, 
+Then, to view the web app run the command
 
 ```bash
 npm run view
