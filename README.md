@@ -3,6 +3,7 @@ AComPianist is a computer pianist that plays an accompanying piece when an image
 
 How Does It Work? 
 -----------------
+![Infographic](/infographic.png)
 
 Instructions
 ------------
