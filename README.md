@@ -20,8 +20,7 @@ Go to the directory where the files are installed.
 Run the following commands to download the required modules and packages.
 
 ```bash
-npm install 
-npm run first-build
+npm install && npm run first-build
 ```
 In the future, to view the web app activate the virtual environment if it hasn't been done using
 
@@ -35,7 +34,7 @@ Then, to view the web app run the command
 npm run view
 ```
 
-For those who are interested to modify any files, run the following command to view the changes made.
+For those who are interested to modify any `.ts` files, run the following command to view the changes made.
 
 ```bash
 npm run build-and-view
