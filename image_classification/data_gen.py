@@ -1,3 +1,9 @@
+""" 
+This code is adapted from that provided by Afshine Amidi and Shervine Amidi
+Find the original code here: 
+https://github.com/afshinea/keras-data-generator/
+"""
+
 import numpy as np
 import keras
 
@@ -47,4 +53,3 @@ class DataGenerator(keras.utils.Sequence):
             # label
             Y[i] = self.extract_label(f)
         return X, Y
-        
