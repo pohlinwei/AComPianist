@@ -3,7 +3,7 @@ AComPianist is a computer pianist that plays an accompanying piece when an image
 
 How Does It Work? 
 -----------------
-![Infographic](/infographic.png)
+![Infographic](/images/infographic.png)
 
 Instructions
 ------------
@@ -18,6 +18,10 @@ Music generation is made possible by using [Performance RNN](https://magenta.ten
 
 ### The Link
 The prediction made by the emotion classification neural network determines the tonality of the music. In particular, if the neural network predicts that the image evokes positive feelings, the tonality will be major (which often induces positive feelings in the listener); if otherwise, it will be minor (which often induces negative feelings). In addition, the image's average hue is calculated. As one moves one's mouse over the image, the difference between the average hue and that of the pixel the cursor is currently pointing to will be determined. By leveraging on the similarity between the colour wheel and the circle of fifths, as shown below, we can relate a difference in visual experience to an auditory one. 
+
+![Colour wheel and circle of fifths](/images/circles.png)
+
+Image source: [Colour wheel](https://pixabay.com/vectors/rainbow-colors-circle-color-spectrum-154569/) and [circle of fifths](https://www.flickr.com/photos/ethanhein/6190222353)
 
 The brightness of the pixel, which the cursor is currently pointing to, determines the note density: the brighter the pixel, the lower the note density and vice versa. Since a lower note density makes the piece sound less complex and a lighter colour often represents pureness, this feature can strengthen the connection between the visual experience and the auditory one.  
 
