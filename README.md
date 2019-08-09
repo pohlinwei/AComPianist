@@ -17,7 +17,7 @@ pip install virtualenv
 
 Go to the directory where the files are installed.
 
-Run the following commands to download the required modules and packages.
+Run the following commands to download the required modules and packages, and to view the web app.
 
 ```bash
 npm install && npm run first-build
