@@ -10,12 +10,17 @@ Instructions
 ### Using Pretrained Weights for Web App
 Download the above files. Then, install [Node.js and npm](https://nodejs.org/en/download/) and [pip](https://pip.pypa.io/en/stable/installing/) if they have yet to be installed. 
 
+If `virutalenv` has not been installed,
+```bash
+pip install virtualenv
+```
+
 Go to the directory where the files are installed.
 
 Run the following commands to download the required modules and packages.
 
 ```bash
-npm install && pip install -r requirements.txt
+npm install && virtualenv venv && pip install -r requirements.txt
 ```
 
 Then, to set up the required environment
