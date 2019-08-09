@@ -7,7 +7,8 @@
     "tsc": "tsc",
     "bundle": "browserify --standalone accompianist main.ts -p [tsify] > bundle.js",
     "build-and-view": "npm run bundle && npm run tsc && node server.js",
-    "view": "npm run tsc && node server.js"
+    "view": "npm run tsc && node server.js",
+    "first-build": "virtualenv venv && . venv/bin/activate && pip install -r requirements.txt && npm run build-and-view"
   },
   "author": "poh lin wei",
   "license": "Apache-2.0",
